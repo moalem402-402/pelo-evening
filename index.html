@@ -237,6 +237,23 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
 /* FAQ */
 .faq h2{margin-top:8px;margin-bottom:10px}
 .faq details p a{color:inherit}
+
+/* waze + calendar */
+.ticket .acts{display:flex;gap:10px;flex-wrap:wrap;padding:0 22px 22px}
+.ticket .acts a{flex:1 1 140px;display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px;border-radius:12px;border:1.5px solid rgba(255,255,255,.35);color:#fff;text-decoration:none;font-weight:700;font-size:15px}
+.ticket .acts a:hover,.ticket .acts a:focus-visible{border-color:var(--gold);color:var(--gold)}
+.ticket .acts svg{width:20px;height:20px;flex:none}
+.ticket .acts .waze{background:#33CCFF;border-color:#33CCFF;color:#0b2733}
+.ticket .acts .waze:hover,.ticket .acts .waze:focus-visible{color:#0b2733;filter:brightness(1.08)}
+.cal-pick{display:none}
+/* outcomes */
+.outcomes h2{margin-top:8px}
+.outcomes ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:14px}
+.outcomes li{display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.5}
+.outcomes li b{display:block}
+.outcomes li span.ck{flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#141414;display:grid;place-items:center;margin-top:2px}
+.outcomes li span.ck svg{width:18px;height:18px}
+.outcomes li p{color:var(--muted);font-size:15.5px;margin-top:2px}
 </style>
 
 </head>
@@ -294,6 +311,21 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
     </div>
   </section>
 
+
+  <!-- עם מה יוצאים -->
+  <section class="sec outcomes">
+    <div class="wrap">
+      <p class="eyebrow">עם מה יוצאים מהערב</p>
+      <h2>לא רק השראה. דברים שלוקחים הביתה.</h2>
+      <ul>
+        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>תמונה ברורה יותר של הצעד הבא שלך</b><p>לפתוח מספרה, או לפתח את זו שכבר יש לך.</p></div></li>
+        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>כלי AI אישי לשיווק</b><p>המתנה שכל משתתף מקבל, ואפשר להתחיל לעבוד איתה כבר למחרת.</p></div></li>
+        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>טיפים למכירת מוצרי שיער</b><p>איך להפוך את המכירה לחלק טבעי מהשירות.</p></div></li>
+        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>היכרות עם ספרים ובעלי מספרות</b><p>אנשים שנמצאים באותה דרך כמוך.</p></div></li>
+      </ul>
+    </div>
+  </section>
+
   <!-- פרטי הערב -->
   <section class="sec" style="padding-top:0" aria-label="פרטי הערב">
     <div class="wrap">
@@ -309,6 +341,10 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
           <dt>מקום</dt><dd>מספרת PELO, בית גוברין 9, רמת השרון</dd>
           <dt>עלינו</dt><dd>כיבוד, שתייה וחנייה</dd>
         </dl>
+        <div class="acts">
+          <a class="waze" href="https://waze.com/ul?q=%D7%91%D7%99%D7%AA%20%D7%92%D7%95%D7%91%D7%A8%D7%99%D7%9F%209%20%D7%A8%D7%9E%D7%AA%20%D7%94%D7%A9%D7%A8%D7%95%D7%9F&navigate=yes" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>ניווט ב־Waze</a>
+          <a id="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%A2%D7%A8%D7%91%20%D7%94%D7%97%D7%A9%D7%99%D7%A4%D7%94%20PELO%20BUSINESS&dates=20261214T150000Z/20261214T180000Z&location=%D7%9E%D7%A1%D7%A4%D7%A8%D7%AA%20PELO%2C%20%D7%91%D7%99%D7%AA%20%D7%92%D7%95%D7%91%D7%A8%D7%99%D7%9F%209%2C%20%D7%A8%D7%9E%D7%AA%20%D7%94%D7%A9%D7%A8%D7%95%D7%9F&details=%D7%A9%D7%90%D7%9C%D7%95%D7%AA%3A%20055-570-7177%0Ahttps%3A//pelo-business-evening.netlify.app" target="_blank" rel="noopener" data-ics="event.ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M12 14v4M10 16h4"/></svg>הוספה ליומן</a>
+        </div>
       </div>
     </div>
   </section>
@@ -328,7 +364,7 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
       <p class="eyebrow">שאלות נפוצות</p>
       <h2>לפני שנרשמים</h2>
       <details><summary>זה מתאים גם אם עדיין אין לי מספרה?</summary><p>כן. הערב מיועד גם לספרים שחושבים לפתוח מספרה וגם לבעלי מספרות שרוצים לפתח את העסק.</p></details>
-      <details><summary>איפה הערב?</summary><p>במספרת PELO, רחוב בית גוברין 9, רמת השרון. החנייה עלינו.</p></details>
+      <details><summary>איפה הערב?</summary><p>במספרת PELO, רחוב בית גוברין 9, רמת השרון. החנייה עלינו. <a href="https://waze.com/ul?q=%D7%91%D7%99%D7%AA%20%D7%92%D7%95%D7%91%D7%A8%D7%99%D7%9F%209%20%D7%A8%D7%9E%D7%AA%20%D7%94%D7%A9%D7%A8%D7%95%D7%9F&navigate=yes" target="_blank" rel="noopener">לניווט ב־Waze</a></p></details>
       <details><summary>צריך להביא משהו?</summary><p>לא. רק להגיע. כיבוד ושתייה עלינו.</p></details>
       <details><summary>איך משלמים?</summary><p>אחרי ההרשמה בוואטסאפ נחזור אליכם לאישור המקום ולתשלום. אפשר גם להעביר 149 ₪ בביט מראש.</p></details>
       <details><summary>ואם לא אוכל להגיע?</summary><p>אפשר לבטל עד 7 ימים לפני הערב ולקבל החזר מלא, או להעביר את הכרטיס לספר אחר בתיאום מראש.</p></details>
@@ -494,12 +530,13 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
   var q=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
   mark(q('.hero .wrap > *'),'',0.12);
   q('main .sec .wrap, main .fine').forEach(function(w){
-    var kids=Array.prototype.slice.call(w.children).filter(function(k){return !k.matches('.items,.chips,.ticket')});
+    var kids=Array.prototype.slice.call(w.children).filter(function(k){return !k.matches('.items,.chips,.ticket,ul')});
     mark(kids,'',0.1);
   });
   mark(q('.agenda .items > li'),'ai-side',0.12);
   mark(q('.who .chips > .chip'),'ai-zoom',0.12);
   mark(q('.ticket'),'ai-zoom',0);
+  mark(q('.outcomes li'),'ai-side',0.1);
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.12});
   q('.ai').forEach(function(el){io.observe(el);});
   setTimeout(function(){q('.ai:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in');});},1500);
@@ -513,6 +550,12 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
   function upd(){var on=!heroIn&&!regIn;bar.classList.toggle('show',on);bar.setAttribute('aria-hidden',on?'false':'true');bar.querySelector('a').tabIndex=on?0:-1;}
   new IntersectionObserver(function(e){heroIn=e[0].isIntersecting;upd();}).observe(hero);
   new IntersectionObserver(function(e){regIn=e[0].isIntersecting;upd();},{rootMargin:'0px 0px -20% 0px'}).observe(reg);
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('cal-btn');if(!b)return;
+  if(/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)&&!/Android/.test(navigator.userAgent)){b.href=b.getAttribute('data-ics');b.removeAttribute('target');}
 })();
 </script>
 </body>
