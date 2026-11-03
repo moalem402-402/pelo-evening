@@ -224,7 +224,7 @@ html.js-anim .ai.ai-zoom{transform:scale(.94)}
 html.js-anim .ai.ai-side{transform:translateX(-28px)}
 html.js-anim .ai.in{opacity:1;transform:none}
 html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
-@media (prefers-reduced-motion:reduce){html.js-anim .ai{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){html.js-anim .ai{transform:none!important;transition:opacity .9s ease var(--d,0s)!important}}
 @media (max-width:700px){.hero .lead{display:none}}
 .hero .when{margin-top:22px;font-size:16.5px;font-weight:700;color:#e6e6e6}
 .hero .when + .btn{margin-top:22px}
@@ -606,7 +606,6 @@ html.a11y-still .swipe-hint svg{animation:none}
 <script>
 (function(){
   if(!('IntersectionObserver' in window))return;
-  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   var root=document.documentElement;root.classList.add('js-anim');
   function mark(list,cls,step){list.forEach(function(el,i){el.classList.add('ai');if(cls)el.classList.add(cls);el.style.setProperty('--d',(i*step).toFixed(2)+'s');});}
   var q=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
