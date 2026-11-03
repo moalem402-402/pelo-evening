@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ערב החשיפה PELO BUSINESS</title>
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="ערב החשיפה של PELO BUSINESS · 14.12">
+<meta property="og:description" content="ערב לספרים ובעלי מספרות שרוצים להתקדם גם בצד העסקי. יום שני 14.12, 17:00 עד 20:00, מספרת PELO רמת השרון.">
+<meta property="og:url" content="https://pelo-business-evening.netlify.app/">
+<meta property="og:image" content="https://pelo-business-evening.netlify.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="ערב החשיפה הראשון של PELO BUSINESS, לספרים ובעלי מספרות. יום שני 14.12.2026, 17:00 עד 20:00. מחיר השקה 149 ₪.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -219,6 +228,15 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
 @media (max-width:700px){.hero .lead{display:none}}
 .hero .when{margin-top:22px;font-size:16.5px;font-weight:700;color:#e6e6e6}
 .hero .when + .btn{margin-top:22px}
+
+/* sticky mobile CTA */
+.sticky-cta{position:fixed;inset-inline:0;bottom:0;z-index:80;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));padding-left:max(80px,calc(env(safe-area-inset-left,0px) + 80px));background:rgba(13,13,13,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid rgba(248,167,32,.35);transform:translateY(110%);transition:transform .35s ease}
+.sticky-cta.show{transform:none}
+.sticky-cta .btn{width:100%;margin:0;padding-block:13px}
+@media (min-width:701px){.sticky-cta{display:none}}
+/* FAQ */
+.faq h2{margin-top:8px;margin-bottom:10px}
+.faq details p a{color:inherit}
 </style>
 
 </head>
@@ -288,6 +306,7 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
           <dt>תאריך</dt><dd>יום שני, 14.12.2026</dd>
           <dt>שעות</dt><dd>17:00 עד 20:00</dd>
           <dt>מחיר</dt><dd><span class="price">149 ₪</span> <span class="pill">מחיר השקה</span></dd>
+          <dt>מקום</dt><dd>מספרת PELO, בית גוברין 9, רמת השרון</dd>
           <dt>עלינו</dt><dd>כיבוד, שתייה וחנייה</dd>
         </dl>
       </div>
@@ -302,6 +321,21 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
     </div>
   </section>
 
+
+  <!-- שאלות נפוצות -->
+  <section class="sec faq">
+    <div class="wrap">
+      <p class="eyebrow">שאלות נפוצות</p>
+      <h2>לפני שנרשמים</h2>
+      <details><summary>זה מתאים גם אם עדיין אין לי מספרה?</summary><p>כן. הערב מיועד גם לספרים שחושבים לפתוח מספרה וגם לבעלי מספרות שרוצים לפתח את העסק.</p></details>
+      <details><summary>איפה הערב?</summary><p>במספרת PELO, רחוב בית גוברין 9, רמת השרון. החנייה עלינו.</p></details>
+      <details><summary>צריך להביא משהו?</summary><p>לא. רק להגיע. כיבוד ושתייה עלינו.</p></details>
+      <details><summary>איך משלמים?</summary><p>אחרי ההרשמה בוואטסאפ נחזור אליכם לאישור המקום ולתשלום. אפשר גם להעביר 149 ₪ בביט מראש.</p></details>
+      <details><summary>ואם לא אוכל להגיע?</summary><p>אפשר לבטל עד 7 ימים לפני הערב ולקבל החזר מלא, או להעביר את הכרטיס לספר אחר בתיאום מראש.</p></details>
+      <details><summary>יש לי עוד שאלה</summary><p>מתקשרים או שולחים וואטסאפ ל־<a href="tel:0555707177" dir="ltr">055-570-7177</a>.</p></details>
+    </div>
+  </section>
+
   <!-- הרשמה -->
   <section class="sec register" id="register">
     <div class="wrap">
@@ -312,7 +346,7 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
       <form id="reg" novalidate>
         <label for="r-name">שם מלא<input type="text" id="r-name" name="name" autocomplete="name" required></label>
         <label for="r-phone">טלפון<input type="tel" id="r-phone" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" style="text-align:right" required></label>
-        <label for="r-age">גיל<input type="text" id="r-age" name="age" inputmode="numeric" maxlength="2" required></label>
+        <label for="r-age">גיל <small>(לא חובה)</small><input type="text" id="r-age" name="age" inputmode="numeric" maxlength="2"></label>
         <fieldset class="q"><legend>איפה אתה היום?</legend>
           <label class="opt"><input type="radio" name="shop" value="has"><span>יש לי מספרה</span></label>
           <label class="opt"><input type="radio" name="shop" value="not-yet"><span>עדיין אין לי מספרה</span></label>
@@ -374,6 +408,8 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
     <p class="contact">שאלות על הערב? <a href="tel:+972555707177" dir="ltr">055-570-7177</a> · <a href="https://wa.me/972555707177" target="_blank" rel="noopener">וואטסאפ</a></p>
   </section>
 </main>
+<div class="sticky-cta" id="sticky-cta" aria-hidden="true"><a class="btn btn-amber" href="#register" tabindex="-1">אני רוצה לשריין מקום</a></div>
+
 
 <footer><div class="wrap"><img src="img/pelo-business-logo.png" alt="PELO BUSINESS" style="height:30px;width:auto"><span dir="ltr">055-570-7177</span></div></footer>
 
@@ -403,11 +439,11 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
     var miss=[],n=document.getElementById('r-name'),p=document.getElementById('r-phone'),a=document.getElementById('r-age'),sh=f.querySelector('input[name=shop]:checked');
     if(!n.value.trim())miss.push('שם');
     if(!/^[0-9\-+ ]{9,}$/.test(p.value.trim()))miss.push('טלפון תקין');
-    if(!/^[0-9]{2}$/.test(a.value.trim()))miss.push('גיל');
+    if(a.value.trim()&&!/^[0-9]{2}$/.test(a.value.trim()))miss.push('גיל תקין');
     if(!sh)miss.push('תשובה לשאלה');
     if(miss.length){err.textContent='חסר: '+miss.join(', ')+'.';err.hidden=false;return;}
     err.hidden=true;
-    var msg='היי, אני רוצה לשריין מקום לערב החשיפה של PELO BUSINESS (14.12)\nשם: '+n.value.trim()+'\nטלפון: '+p.value.trim()+'\nגיל: '+a.value.trim()+'\n'+(sh.value==='has'?'יש לי מספרה':'עדיין אין לי מספרה');
+    var msg='היי, אני רוצה לשריין מקום לערב החשיפה של PELO BUSINESS (14.12)\nשם: '+n.value.trim()+'\nטלפון: '+p.value.trim()+(a.value.trim()?'\nגיל: '+a.value.trim():'')+'\n'+(sh.value==='has'?'יש לי מספרה':'עדיין אין לי מספרה');
     window.location.href='https://wa.me/972555707177?text='+encodeURIComponent(msg);
   });
 })();
@@ -467,6 +503,16 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.12});
   q('.ai').forEach(function(el){io.observe(el);});
   setTimeout(function(){q('.ai:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in');});},1500);
+})();
+</script>
+<script>
+(function(){
+  var bar=document.getElementById('sticky-cta'),hero=document.querySelector('.hero'),reg=document.getElementById('register');
+  if(!bar||!('IntersectionObserver' in window))return;
+  var heroIn=true,regIn=false;
+  function upd(){var on=!heroIn&&!regIn;bar.classList.toggle('show',on);bar.setAttribute('aria-hidden',on?'false':'true');bar.querySelector('a').tabIndex=on?0:-1;}
+  new IntersectionObserver(function(e){heroIn=e[0].isIntersecting;upd();}).observe(hero);
+  new IntersectionObserver(function(e){regIn=e[0].isIntersecting;upd();},{rootMargin:'0px 0px -20% 0px'}).observe(reg);
 })();
 </script>
 </body>
