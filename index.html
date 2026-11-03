@@ -208,6 +208,14 @@ html.a11y-gray .site{filter:grayscale(1)}
 .bit-steps{background:#E6F7F8;border-radius:12px;padding:14px 16px;font-size:15.5px;line-height:1.6}
 .bit-steps ol{margin:6px 0 0;padding-inline-start:20px}
 .bit-steps b{direction:ltr;unicode-bidi:isolate}
+
+/* entrance animations */
+html.js-anim .ai{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .7s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+html.js-anim .ai.ai-zoom{transform:scale(.94)}
+html.js-anim .ai.ai-side{transform:translateX(-28px)}
+html.js-anim .ai.in{opacity:1;transform:none}
+html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
+@media (prefers-reduced-motion:reduce){html.js-anim .ai{opacity:1;transform:none;transition:none}}
 </style>
 
 </head>
@@ -438,5 +446,25 @@ html.a11y-gray .site{filter:grayscale(1)}
 
 
 
+<script>
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var root=document.documentElement;root.classList.add('js-anim');
+  function mark(list,cls,step){list.forEach(function(el,i){el.classList.add('ai');if(cls)el.classList.add(cls);el.style.setProperty('--d',(i*step).toFixed(2)+'s');});}
+  var q=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+  mark(q('.hero .wrap > *'),'',0.12);
+  q('main .sec .wrap, main .fine').forEach(function(w){
+    var kids=Array.prototype.slice.call(w.children).filter(function(k){return !k.matches('.items,.chips,.ticket')});
+    mark(kids,'',0.1);
+  });
+  mark(q('.agenda .items > li'),'ai-side',0.12);
+  mark(q('.who .chips > .chip'),'ai-zoom',0.12);
+  mark(q('.ticket'),'ai-zoom',0);
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.12});
+  q('.ai').forEach(function(el){io.observe(el);});
+  setTimeout(function(){q('.ai:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in');});},1500);
+})();
+</script>
 </body>
 </html>
