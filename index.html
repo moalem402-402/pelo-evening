@@ -308,6 +308,35 @@ html.a11y-still .swipe-hint svg{animation:none}
 .agenda .ag-title{text-align:center;margin-top:0}
 .agenda .swipe-hint{display:none}
 @media (max-width:700px){.agenda .wrap{text-align:center}.agenda .items{text-align:start}.agenda .swipe-hint{display:inline-flex}}
+
+/* countdown */
+.cd{display:flex;gap:8px;margin-top:14px;direction:rtl}
+.cd div{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:8px 4px;text-align:center}
+.cd b{display:block;font-family:var(--num);font-size:26px;line-height:1.1;color:var(--gold);font-variant-numeric:tabular-nums}
+.cd span{font-size:12.5px;color:#bdbdbd}
+.cd-label{margin-top:16px;font-size:13px;letter-spacing:.06em;color:#bdbdbd}
+/* merged pay box */
+.paybox{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:18px 16px;display:grid;gap:14px}
+.paybox .pricebox{border:0;padding:0;background:transparent!important}
+.paybox .pricebox b{font-size:28px;color:var(--ink)}
+.paybox .or{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;font-weight:700}
+.paybox .or::before,.paybox .or::after{content:"";flex:1;height:1px;background:var(--line)}
+.paybox .bit{margin:0;border:0;padding:0;gap:10px;background:transparent!important}
+.paybox .consent{margin:0}
+/* thank you */
+.done{background:#fff;border:1.5px solid var(--gold);border-radius:20px;padding:26px 20px;text-align:center;display:grid;gap:10px;margin-top:24px}
+.done .tick{background:var(--gold);color:#141414}
+.done b{font-size:22px;color:var(--ink)}
+.done p{color:var(--muted)}
+.done .btn{margin-top:6px}
+.done .links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;font-size:14.5px}
+.done .links a,.done .links button{color:var(--ink);background:none;border:0;font:inherit;text-decoration:underline;cursor:pointer;padding:4px}
+/* who: lighter rows */
+.who .chips{gap:0;margin-top:18px}
+.who .chip{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:14px 2px;font-size:17px}
+.who .chip:last-child{border-bottom:0}
+.who .chip .ico{width:38px;height:38px;border-radius:12px;background:#FFF1D6;color:#8A5600}
+.who .chip .ico svg{width:21px;height:21px}
 </style>
 
 </head>
@@ -373,6 +402,8 @@ html.a11y-still .swipe-hint svg{animation:none}
         <div class="top">
           <p class="eyebrow">פרטי הערב</p>
           <p class="title">ערב החשיפה וההשתלמות</p>
+          <p class="cd-label" id="cd-label">עד הערב נשארו</p>
+          <div class="cd" id="cd" role="timer" aria-labelledby="cd-label"><div><b id="cd-d">--</b><span>ימים</span></div><div><b id="cd-h">--</b><span>שעות</span></div><div><b id="cd-m">--</b><span>דקות</span></div><div><b id="cd-s">--</b><span>שניות</span></div></div>
         </div>
         <dl>
           <dt>תאריך</dt><dd>יום שני, 14.12.2026</dd>
@@ -428,27 +459,35 @@ html.a11y-still .swipe-hint svg{animation:none}
           <label class="opt"><input type="radio" name="shop" value="not-yet"><span>עדיין אין לי מספרה</span></label>
         </fieldset>
 
-        <div class="pricebox">
-          <div><span>כרטיס לערב</span> <span class="pill">מחיר השקה</span><small>משלמים לאחר אישור המקום</small></div>
-          <b>149 ₪</b>
-        </div>
+        <div class="paybox">
+          <div class="pricebox">
+            <div><span>כרטיס לערב</span> <span class="pill">מחיר השקה</span><small>משלמים לאחר אישור המקום</small></div>
+            <b>149 ₪</b>
+          </div>
 
-        <p class="err" id="r-err" hidden></p>
-        <button class="btn btn-amber" type="submit">שריון מקום בוואטסאפ</button>
-        <p class="consent">בלחיצה על "שריון מקום בוואטסאפ" אני מאשר/ת את <a href="#terms">תנאי ההרשמה והביטול</a> ואת <a href="#privacy">מדיניות הפרטיות</a>.</p>
+          <p class="err" id="r-err" hidden></p>
+          <button class="btn btn-amber" type="submit">שריון מקום בוואטסאפ</button>
+          <p class="consent">בלחיצה על "שריון מקום בוואטסאפ" אני מאשר/ת את <a href="#terms">תנאי ההרשמה והביטול</a> ואת <a href="#privacy">מדיניות הפרטיות</a>.</p>
+          <div class="bit" aria-labelledby="bit-title">
+            <p class="or" id="bit-title">או לשלם כבר עכשיו בביט</p>
+            <button class="btn btn-bit" type="button" id="bit-btn" aria-controls="bit-steps" aria-expanded="false" aria-label="לתשלום מהיר בביט">לתשלום מהיר עם <span class="bit-logo" aria-hidden="true">bit</span></button>
+            <div class="bit-steps" id="bit-steps" hidden role="status">
+              <p id="bit-copied">מספר הטלפון <b dir="ltr" class="nw">055-570-7177</b> הועתק.</p>
+              <ol>
+                <li>פותחים את אפליקציית ביט ובוחרים "העברה".</li>
+                <li>מדביקים את המספר <b dir="ltr" class="nw">055-570-7177</b>.</li>
+                <li>מעבירים <b>149 ₪</b> ומוסיפים בהערה את השם המלא.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
       </form>
-
-      <div class="bit" aria-labelledby="bit-title">
-        <p class="t" id="bit-title">רוצים לשלם כבר עכשיו?<small>אפשר להעביר 149 ₪ בביט, ואנחנו נאשר את המקום.</small></p>
-        <button class="btn btn-bit" type="button" id="bit-btn" aria-controls="bit-steps" aria-expanded="false" aria-label="לתשלום מהיר בביט">לתשלום מהיר עם <span class="bit-logo" aria-hidden="true">bit</span></button>
-        <div class="bit-steps" id="bit-steps" hidden role="status">
-          <p id="bit-copied">מספר הטלפון <b dir="ltr" class="nw">055-570-7177</b> הועתק.</p>
-          <ol>
-            <li>פותחים את אפליקציית ביט ובוחרים "העברה".</li>
-            <li>מדביקים את המספר <b dir="ltr" class="nw">055-570-7177</b>.</li>
-            <li>מעבירים <b>149 ₪</b> ומוסיפים בהערה את השם המלא.</li>
-          </ol>
-        </div>
+      <div class="done" id="done" hidden tabindex="-1">
+        <div class="tick" aria-hidden="true">✓</div>
+        <b id="done-title">קיבלנו!</b>
+        <p>ההרשמה נשלחת אלינו בוואטסאפ. נחזור אליך לאישור המקום ולתשלום.</p>
+        <a class="btn btn-amber" id="done-cal" href="#" target="_blank" rel="noopener">הוספת הערב ליומן</a>
+        <div class="links"><a id="done-wa" href="#">וואטסאפ לא נפתח? לחצו כאן</a><button type="button" id="done-edit">לתקן פרטים</button></div>
       </div>
 
     </div>
@@ -520,7 +559,10 @@ html.a11y-still .swipe-hint svg{animation:none}
     if(miss.length){err.textContent='חסר: '+miss.join(', ')+'.';err.hidden=false;return;}
     err.hidden=true;
     var msg='היי, אני רוצה לשריין מקום לערב החשיפה של PELO BUSINESS (14.12)\nשם: '+n.value.trim()+'\nטלפון: '+p.value.trim()+(a.value.trim()?'\nגיל: '+a.value.trim():'')+'\n'+(sh.value==='has'?'יש לי מספרה':'עדיין אין לי מספרה');
-    window.location.href='https://wa.me/972555707177?text='+encodeURIComponent(msg);
+    var wa='https://wa.me/972555707177?text='+encodeURIComponent(msg);
+    try{localStorage.setItem('pelo-reg',JSON.stringify({n:n.value.trim(),wa:wa}));}catch(_){}
+    showDone(n.value.trim(),wa);
+    window.location.href=wa;
   });
 })();
 </script>
@@ -621,6 +663,31 @@ html.a11y-still .swipe-hint svg{animation:none}
     setTimeout(function(){if(done)return;nud=true;var rtl=getComputedStyle(ul).direction==='rtl';ul.scrollBy({left:rtl?-90:90,behavior:'smooth'});
       setTimeout(function(){ul.scrollTo({left:0,behavior:'smooth'});setTimeout(function(){nud=false;},800);},700);},900);
   },{threshold:.6});io.observe(ul);
+})();
+</script>
+<script>
+function showDone(name,wa){
+  var f=document.getElementById('reg'),d=document.getElementById('done');if(!d)return;
+  f.hidden=true;d.hidden=false;
+  document.getElementById('done-title').textContent=name?('קיבלנו, '+name.split(' ')[0]+'!'):'קיבלנו!';
+  document.getElementById('done-wa').href=wa||'https://wa.me/972555707177';
+  var c=document.getElementById('cal-btn');if(c){var dc=document.getElementById('done-cal');dc.href=c.href;if(!c.target)dc.removeAttribute('target');}
+  try{d.focus({preventScroll:true});}catch(_){}
+}
+(function(){
+  var e=document.getElementById('done-edit');
+  if(e)e.addEventListener('click',function(){try{localStorage.removeItem('pelo-reg');}catch(_){}document.getElementById('done').hidden=true;var f=document.getElementById('reg');f.hidden=false;document.getElementById('r-name').focus();});
+  var st=null;try{st=JSON.parse(localStorage.getItem('pelo-reg'));}catch(_){}
+  if(st)showDone(st.n,st.wa);
+  // countdown
+  var T=Date.UTC(2026,11,14,15,0,0),ids=['d','h','m','s'].map(function(k){return document.getElementById('cd-'+k);});
+  if(!ids[0])return;
+  function pad(n){return n<10?'0'+n:''+n;}
+  function tick(){var x=Math.max(0,T-Date.now()),s=Math.floor(x/1000);
+    var v=[Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60];
+    ids[0].textContent=v[0];for(var i=1;i<4;i++)ids[i].textContent=pad(v[i]);
+    if(x<=0){document.getElementById('cd').hidden=true;document.getElementById('cd-label').textContent='הערב כבר כאן';}}
+  tick();setInterval(tick,1000);
 })();
 </script>
 </body>
