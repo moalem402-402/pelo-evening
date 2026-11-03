@@ -246,14 +246,6 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
 .ticket .acts .waze{background:#33CCFF;border-color:#33CCFF;color:#0b2733}
 .ticket .acts .waze:hover,.ticket .acts .waze:focus-visible{color:#0b2733;filter:brightness(1.08)}
 .cal-pick{display:none}
-/* outcomes */
-.outcomes h2{margin-top:8px}
-.outcomes ul{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:14px}
-.outcomes li{display:flex;gap:14px;align-items:flex-start;font-size:17px;line-height:1.5}
-.outcomes li b{display:block}
-.outcomes li span.ck{flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#141414;display:grid;place-items:center;margin-top:2px}
-.outcomes li span.ck svg{width:18px;height:18px}
-.outcomes li p{color:var(--muted);font-size:15.5px;margin-top:2px}
 </style>
 
 </head>
@@ -311,20 +303,6 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
     </div>
   </section>
 
-
-  <!-- עם מה יוצאים -->
-  <section class="sec outcomes">
-    <div class="wrap">
-      <p class="eyebrow">עם מה יוצאים מהערב</p>
-      <h2>לא רק השראה. דברים שלוקחים הביתה.</h2>
-      <ul>
-        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>תמונה ברורה יותר של הצעד הבא שלך</b><p>לפתוח מספרה, או לפתח את זו שכבר יש לך.</p></div></li>
-        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>כלי AI אישי לשיווק</b><p>המתנה שכל משתתף מקבל, ואפשר להתחיל לעבוד איתה כבר למחרת.</p></div></li>
-        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>טיפים למכירת מוצרי שיער</b><p>איך להפוך את המכירה לחלק טבעי מהשירות.</p></div></li>
-        <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>היכרות עם ספרים ובעלי מספרות</b><p>אנשים שנמצאים באותה דרך כמוך.</p></div></li>
-      </ul>
-    </div>
-  </section>
 
   <!-- פרטי הערב -->
   <section class="sec" style="padding-top:0" aria-label="פרטי הערב">
@@ -536,7 +514,6 @@ html.js-anim.a11y-still .ai{opacity:1!important;transform:none!important}
   mark(q('.agenda .items > li'),'ai-side',0.12);
   mark(q('.who .chips > .chip'),'ai-zoom',0.12);
   mark(q('.ticket'),'ai-zoom',0);
-  mark(q('.outcomes li'),'ai-side',0.1);
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px',threshold:0.12});
   q('.ai').forEach(function(el){io.observe(el);});
   setTimeout(function(){q('.ai:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight)el.classList.add('in');});},1500);
