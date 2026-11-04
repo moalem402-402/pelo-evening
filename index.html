@@ -451,6 +451,7 @@ html.a11y-still .swipe-hint svg{animation:none}
         <label for="r-name">שם מלא<input type="text" id="r-name" name="name" autocomplete="name" required></label>
         <label for="r-phone">טלפון<input type="tel" id="r-phone" name="phone" autocomplete="tel" inputmode="tel" dir="ltr" style="text-align:right" required></label>
         <label for="r-age"><span>גיל <small>(לא חובה)</small></span><input type="text" id="r-age" name="age" inputmode="numeric" maxlength="2"></label>
+        <label for="r-email">מייל<input type="email" id="r-email" name="email" autocomplete="email" inputmode="email" dir="ltr" style="text-align:right" required></label>
         <fieldset class="q"><legend>איפה אתה היום?</legend>
           <label class="opt"><input type="radio" name="shop" value="has"><span>יש לי מספרה</span></label>
           <label class="opt"><input type="radio" name="shop" value="not-yet"><span>עדיין אין לי מספרה</span></label>
@@ -510,7 +511,7 @@ html.a11y-still .swipe-hint svg{animation:none}
         <p>ההצהרה עודכנה ב־2.11.2026.</p>
       </div></details>
       <details id="privacy"><summary>מדיניות פרטיות</summary><div class="legal">
-        <p><b>אילו פרטים נאספים.</b> שם מלא, טלפון, גיל, והתשובה לשאלה אם יש לך מספרה.</p>
+        <p><b>אילו פרטים נאספים.</b> שם מלא, טלפון, מייל, גיל, והתשובה לשאלה אם יש לך מספרה.</p>
         <p><b>למה.</b> לצורך ההרשמה לערב, שליחת אישור ועדכונים על הערב, והתאמת התוכן למשתתפים. בנוסף, ייתכן שנפנה אליך בעתיד עם מידע על שירותי PELO BUSINESS. אפשר לבקש בכל עת להפסיק לקבל פניות כאלה.</p>
         <p><b>תשלום.</b> התשלום מתבצע בעמוד מאובטח של חברת סליקה חיצונית. פרטי כרטיס האשראי לא מגיעים אלינו ולא נשמרים אצלנו.</p>
         <p><b>שיתוף.</b> הפרטים לא נמכרים ולא מועברים לצד שלישי, למעט ספקים שעוזרים לנו להפעיל את ההרשמה והתשלום, ורק במידה הנדרשת לכך.</p>
@@ -548,14 +549,15 @@ html.a11y-still .swipe-hint svg{animation:none}
   var f=document.getElementById('reg'),err=document.getElementById('r-err');
   f.addEventListener('submit',function(e){
     e.preventDefault();
-    var miss=[],n=document.getElementById('r-name'),p=document.getElementById('r-phone'),a=document.getElementById('r-age'),sh=f.querySelector('input[name=shop]:checked');
+    var miss=[],n=document.getElementById('r-name'),p=document.getElementById('r-phone'),a=document.getElementById('r-age'),em=document.getElementById('r-email'),sh=f.querySelector('input[name=shop]:checked');
     if(!n.value.trim())miss.push('שם');
     if(!/^[0-9\-+ ]{9,}$/.test(p.value.trim()))miss.push('טלפון תקין');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim()))miss.push('מייל תקין');
     if(a.value.trim()&&!/^[0-9]{2}$/.test(a.value.trim()))miss.push('גיל תקין');
     if(!sh)miss.push('תשובה לשאלה');
     if(miss.length){err.textContent='חסר: '+miss.join(', ')+'.';err.hidden=false;return;}
     err.hidden=true;
-    var msg='היי, אני רוצה לשריין מקום לערב החשיפה של PELO BUSINESS (14.12)\nשם: '+n.value.trim()+'\nטלפון: '+p.value.trim()+(a.value.trim()?'\nגיל: '+a.value.trim():'')+'\n'+(sh.value==='has'?'יש לי מספרה':'עדיין אין לי מספרה');
+    var msg='היי, אני רוצה לשריין מקום לערב החשיפה של PELO BUSINESS (14.12)\nשם: '+n.value.trim()+'\nטלפון: '+p.value.trim()+'\nמייל: '+em.value.trim()+(a.value.trim()?'\nגיל: '+a.value.trim():'')+'\n'+(sh.value==='has'?'יש לי מספרה':'עדיין אין לי מספרה');
     var wa='https://wa.me/972555707177?text='+encodeURIComponent(msg);
     try{localStorage.setItem('pelo-reg',JSON.stringify({n:n.value.trim(),wa:wa}));}catch(_){}
     showDone(n.value.trim(),wa);
